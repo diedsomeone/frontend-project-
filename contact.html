@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Student Performance Tracker</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script defer src="../js/main.js"></script>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">SPT</div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="student-login.html">Student Login</a></li>
+                <li><a href="teacher-login.html">Teacher Login</a></li>
+                <li><a href="admin-login.html">Admin Login</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section class="container fadein-section" style="padding:3rem 0 2rem 0;">
+        <h1 class="section-title animated fadeInDown">Contact Us</h1>
+        <p class="animated fadeInUp" style="max-width:700px;margin:0 auto 2rem auto;font-size:1.15rem;line-height:1.7;">
+            Have questions, feedback, or need support? Reach out to us using the form below. We value your input and are here to help you make the most of the Student Performance Tracker.
+        </p>
+        <div class="contact-card animated fadeInUp" style="max-width:500px;margin:0 auto 2rem auto;background:#fff;border-radius:1.5rem;box-shadow:0 8px 32px 0 rgba(79,140,255,0.13);padding:2.2rem 2rem 1.5rem 2rem;">
+            <form class="contact-form" autocomplete="off">
+                <div class="input-group" style="margin-bottom:1.2rem;">
+                    <label for="name" style="font-weight:600;display:flex;align-items:center;gap:0.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#4f8cff" d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm7 2h-1.26a8.96 8.96 0 0 1-11.48 0H5a3 3 0 0 0-3 3v2.25A2.75 2.75 0 0 0 4.75 20h14.5A2.75 2.75 0 0 0 22 17.25V15a3 3 0 0 0-3-3Z"/></svg>
+                        Name
+                    </label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required style="margin-top:0.3rem;">
+                </div>
+                <div class="input-group" style="margin-bottom:1.2rem;">
+                    <label for="email" style="font-weight:600;display:flex;align-items:center;gap:0.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#4f8cff" d="M2 6.75A2.75 2.75 0 0 1 4.75 4h14.5A2.75 2.75 0 0 1 22 6.75v10.5A2.75 2.75 0 0 1 19.25 20H4.75A2.75 2.75 0 0 1 2 17.25V6.75Zm2.53.53a.75.75 0 0 0-.53.72v0.06l8 5.25 8-5.25v-0.06a.75.75 0 0 0-.53-.72.75.75 0 0 0-.72.11L12 11.19 5.75 7.39a.75.75 0 0 0-.72-.11Z"/></svg>
+                        Email
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required style="margin-top:0.3rem;">
+                </div>
+                <div class="input-group" style="margin-bottom:1.2rem;">
+                    <label for="message" style="font-weight:600;display:flex;align-items:center;gap:0.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#4f8cff" d="M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h10v2H4v-2zm0 4h7v2H4v-2z"/></svg>
+                        Message
+                    </label>
+                    <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required style="margin-top:0.3rem;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top:0.5rem;display:flex;align-items:center;gap:0.5rem;justify-content:center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#fff" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                    Send Message
+                </button>
+            </form>
+        </div>
+        <div style="text-align:center;margin-top:2.5rem;">
+            <a href="../index.html" class="btn btn-outline">Return to Home Page</a>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Student Performance Tracker. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+    // Simple form animation and fake submit
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for contacting us! We will get back to you soon.');
+        this.reset();
+    });
+    </script>
+</body>
+</html>

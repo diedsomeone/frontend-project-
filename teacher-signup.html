@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Registration - Student Performance Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #e8f5e9 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .teacher-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100vw;
+        }
+        .teacher-card {
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(60, 100, 180, 0.12);
+            padding: 2.5rem 2rem;
+            max-width: 420px;
+            width: 100%;
+            margin: 2rem auto;
+            animation: fadeInUp 1s;
+        }
+        .teacher-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2196f3;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .teacher-subtitle {
+            font-size: 1rem;
+            color: #43a047;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .teacher-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .input-group {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .input-group input,
+        .input-group select {
+            padding: 0.75rem 2.5rem 0.75rem 2.5rem;
+            border: 1px solid #d0d0d0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+        }
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #2196f3;
+            box-shadow: 0 0 0 2px #e0f7fa;
+        }
+        .input-group label {
+            font-size: 0.95rem;
+            color: #3a3a3a;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+        .input-group .input-icon {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b0b0b0;
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+        .input-group .toggle-password {
+            position: absolute;
+            right: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #b0b0b0;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+        }
+        .input-group .toggle-password:hover {
+            color: #2196f3;
+        }
+        .error-message {
+            color: #ff4d4d;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+            min-height: 1.1em;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .checkbox-group input[type="checkbox"] {
+            accent-color: #2196f3;
+        }
+        .form-actions {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(90deg, #2196f3 0%, #43a047 100%);
+            color: #fff;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn:hover {
+            background: linear-gradient(90deg, #43a047 0%, #2196f3 100%);
+            transform: translateY(-2px) scale(1.03);
+        }
+        .btn-reset {
+            background: #f0f0f0;
+            color: #3a3a3a;
+            border: 1px solid #d0d0d0;
+            transition: background 0.3s, color 0.3s;
+        }
+        .btn-reset:hover {
+            background: #e0f7fa;
+            color: #2196f3;
+        }
+        .login-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.2rem;
+            color: #2196f3;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .login-link:hover {
+            color: #43a047;
+        }
+        .success-message {
+            text-align: center;
+            color: #2196f3;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            font-weight: 600;
+            animation: fadeIn 0.7s;
+        }
+        @media (max-width: 600px) {
+            .teacher-container {
+                padding: 1rem;
+            }
+            .teacher-card {
+                padding: 1.2rem 0.7rem;
+                max-width: 98vw;
+            }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="teacher-container">
+        <div class="teacher-card">
+            <div class="teacher-title">Teacher Registration</div>
+            <div class="teacher-subtitle">Create your account to manage student performance</div>
+            <form class="teacher-form" id="teacherSignupForm" autocomplete="off">
+                <div class="input-group">
+                    <label for="teacherName">Full Name</label>
+                    <i class="fa fa-user input-icon"></i>
+                    <input type="text" id="teacherName" name="teacherName" required placeholder="Enter your name">
+                    <div class="error-message" id="errorTeacherName"></div>
+                </div>
+                <div class="input-group">
+                    <label for="teacherId">Teacher ID</label>
+                    <i class="fa fa-id-badge input-icon"></i>
+                    <input type="text" id="teacherId" name="teacherId" required placeholder="Enter teacher ID">
+                    <div class="error-message" id="errorTeacherId"></div>
+                </div>
+                <div class="input-group">
+                    <label for="teacherEmail">Email Address</label>
+                    <i class="fa fa-envelope input-icon"></i>
+                    <input type="email" id="teacherEmail" name="teacherEmail" required placeholder="Enter your email">
+                    <div class="error-message" id="errorTeacherEmail"></div>
+                </div>
+                <div class="input-group">
+                    <label for="teacherSubject">Subject</label>
+                    <i class="fa fa-book input-icon"></i>
+                    <input type="text" id="teacherSubject" name="teacherSubject" required placeholder="Enter subject">
+                    <div class="error-message" id="errorTeacherSubject"></div>
+                </div>
+                <div class="input-group">
+                    <label for="teacherDepartment">Department</label>
+                    <i class="fa fa-building input-icon"></i>
+                    <input type="text" id="teacherDepartment" name="teacherDepartment" required placeholder="Enter department">
+                    <div class="error-message" id="errorTeacherDepartment"></div>
+                </div>
+                <div class="input-group">
+                    <label for="teacherPhone">Phone Number</label>
+                    <i class="fa fa-phone input-icon"></i>
+                    <input type="text" id="teacherPhone" name="teacherPhone" required placeholder="Enter phone number">
+                    <div class="error-message" id="errorTeacherPhone"></div>
+                </div>
+                <div class="input-group">
+                    <label for="teacherPassword">Password</label>
+                    <i class="fa fa-lock input-icon"></i>
+                    <input type="password" id="teacherPassword" name="teacherPassword" required placeholder="Enter password">
+                    <span class="toggle-password" id="toggleTeacherPassword"><i class="fa fa-eye"></i></span>
+                    <div class="error-message" id="errorTeacherPassword"></div>
+                </div>
+                <div class="input-group">
+                    <label for="teacherConfirmPassword">Confirm Password</label>
+                    <i class="fa fa-lock input-icon"></i>
+                    <input type="password" id="teacherConfirmPassword" name="teacherConfirmPassword" required placeholder="Confirm password">
+                    <span class="toggle-password" id="toggleTeacherConfirmPassword"><i class="fa fa-eye"></i></span>
+                    <div class="error-message" id="errorTeacherConfirmPassword"></div>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="teacherTerms" name="teacherTerms" required>
+                    <label for="teacherTerms" style="font-size:0.95rem;">I agree to the <a href="#" style="color:#2196f3;text-decoration:underline;">Terms & Conditions</a></label>
+                </div>
+                <div class="error-message" id="errorTeacherTerms"></div>
+                <div class="form-actions">
+                    <button type="submit" class="btn">Sign Up</button>
+                    <button type="reset" class="btn btn-reset">Reset</button>
+                </div>
+            </form>
+            <a href="#" class="login-link">Already have an account? Login</a>
+            <div class="success-message" id="teacherSuccessMessage" style="display:none;"></div>
+        </div>
+    </div>
+    <script>
+        // Password show/hide toggle
+        const teacherPasswordInput = document.getElementById('teacherPassword');
+        const teacherConfirmPasswordInput = document.getElementById('teacherConfirmPassword');
+        const toggleTeacherPassword = document.getElementById('toggleTeacherPassword');
+        const toggleTeacherConfirmPassword = document.getElementById('toggleTeacherConfirmPassword');
+        toggleTeacherPassword.addEventListener('click', () => {
+            const type = teacherPasswordInput.type === 'password' ? 'text' : 'password';
+            teacherPasswordInput.type = type;
+            toggleTeacherPassword.innerHTML = type === 'password' ? '<i class="fa fa-eye"></i>' : '<i class="fa fa-eye-slash"></i>';
+        });
+        toggleTeacherConfirmPassword.addEventListener('click', () => {
+            const type = teacherConfirmPasswordInput.type === 'password' ? 'text' : 'password';
+            teacherConfirmPasswordInput.type = type;
+            toggleTeacherConfirmPassword.innerHTML = type === 'password' ? '<i class="fa fa-eye"></i>' : '<i class="fa fa-eye-slash"></i>';
+        });
+
+        // Form validation
+        const teacherSignupForm = document.getElementById('teacherSignupForm');
+        const teacherSuccessMessage = document.getElementById('teacherSuccessMessage');
+        teacherSignupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let valid = true;
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+            teacherSuccessMessage.style.display = 'none';
+
+            // Full Name
+            const teacherName = teacherSignupForm.teacherName.value.trim();
+            if (!teacherName) {
+                document.getElementById('errorTeacherName').textContent = 'Full Name is required.';
+                valid = false;
+            }
+            // Teacher ID
+            const teacherId = teacherSignupForm.teacherId.value.trim();
+            if (!teacherId) {
+                document.getElementById('errorTeacherId').textContent = 'Teacher ID is required.';
+                valid = false;
+            }
+            // Email
+            const teacherEmail = teacherSignupForm.teacherEmail.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!teacherEmail) {
+                document.getElementById('errorTeacherEmail').textContent = 'Email is required.';
+                valid = false;
+            } else if (!emailPattern.test(teacherEmail)) {
+                document.getElementById('errorTeacherEmail').textContent = 'Enter a valid email address.';
+                valid = false;
+            }
+            // Subject
+            const teacherSubject = teacherSignupForm.teacherSubject.value.trim();
+            if (!teacherSubject) {
+                document.getElementById('errorTeacherSubject').textContent = 'Subject is required.';
+                valid = false;
+            }
+            // Department
+            const teacherDepartment = teacherSignupForm.teacherDepartment.value.trim();
+            if (!teacherDepartment) {
+                document.getElementById('errorTeacherDepartment').textContent = 'Department is required.';
+                valid = false;
+            }
+            // Phone
+            const teacherPhone = teacherSignupForm.teacherPhone.value.trim();
+            if (!teacherPhone) {
+                document.getElementById('errorTeacherPhone').textContent = 'Phone number is required.';
+                valid = false;
+            } else if (!/^\d+$/.test(teacherPhone)) {
+                document.getElementById('errorTeacherPhone').textContent = 'Phone number must be numeric.';
+                valid = false;
+            }
+            // Password
+            const teacherPassword = teacherSignupForm.teacherPassword.value;
+            if (!teacherPassword) {
+                document.getElementById('errorTeacherPassword').textContent = 'Password is required.';
+                valid = false;
+            } else if (teacherPassword.length < 6) {
+                document.getElementById('errorTeacherPassword').textContent = 'Password must be at least 6 characters.';
+                valid = false;
+            }
+            // Confirm Password
+            const teacherConfirmPassword = teacherSignupForm.teacherConfirmPassword.value;
+            if (!teacherConfirmPassword) {
+                document.getElementById('errorTeacherConfirmPassword').textContent = 'Confirm your password.';
+                valid = false;
+            } else if (teacherConfirmPassword !== teacherPassword) {
+                document.getElementById('errorTeacherConfirmPassword').textContent = 'Passwords do not match.';
+                valid = false;
+            }
+            // Terms
+            const teacherTerms = teacherSignupForm.teacherTerms.checked;
+            if (!teacherTerms) {
+                document.getElementById('errorTeacherTerms').textContent = 'You must agree to the Terms & Conditions.';
+                valid = false;
+            }
+            if (valid) {
+                teacherSuccessMessage.textContent = 'Account created successfully!';
+                teacherSuccessMessage.style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = '#'; // Redirect to login page or change link
+                }, 1500);
+                teacherSignupForm.reset();
+            }
+        });
+        // Reset button clears errors and success
+        teacherSignupForm.addEventListener('reset', function() {
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+            teacherSuccessMessage.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

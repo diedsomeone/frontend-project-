@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Student Performance Tracker</title>
+            <link rel="stylesheet" href="css/modern-home.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <!-- AOS Animate On Scroll Library -->
+            <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+            <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+            <script defer src="js/modern-home.js"></script>
+            <style>
+                /* Extra glassmorphism for demo */
+                .glass {
+                    background: rgba(255,255,255,0.18);
+                    
+                    backdrop-filter: blur(18px);
+                    border-radius: 1.5rem;
+                    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+                }
+            </style>
+        </head>
+        <body>
+            <div class="diagonal-bg">
+                <!-- Navigation Bar -->
+                <nav class="navbar">
+                    <div class="nav-container">
+                        <div class="logo">
+                            <span class="logo-icon">
+                                <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <radialGradient id="spt-grad" cx="50%" cy="50%" r="50%">
+                                            <stop offset="0%" stop-color="#b39ddb"/>
+                                            <stop offset="100%" stop-color="#92119e"/>
+                                        </radialGradient>
+                                        <filter id="spt-shadow" x="0" y="0" width="56" height="56" filterUnits="userSpaceOnUse">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#5f0a87" flood-opacity="0.18"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="28" cy="28" r="24" fill="url(#spt-grad)" stroke="#fff" stroke-width="3" filter="url(#spt-shadow)"/>
+                                    <text x="28" y="34" text-anchor="middle" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#fff" font-weight="bold" letter-spacing="2">SPT</text>
+                                </svg>
+                            </span>
+                        </div>
+                        <ul class="nav-links">
+                            <li><a href="index.html" class="active"><i class="fa fa-home"></i> Home</a></li>
+                            <li><a href="pages/student-login.html"><i class="fa fa-user-graduate"></i> Student Login</a></li>
+                            <li><a href="pages/teacher-login.html"><i class="fa fa-chalkboard-teacher"></i> Teacher Login</a></li>
+                            <li><a href="pages/admin-login.html"><i class="fa fa-user-shield"></i> Admin Login</a></li>
+                            <li><a href="pages/contact.html"><i class="fa fa-envelope"></i> Contact Us</a></li>
+                            <li><a href="#profile"><i class="fa fa-user-circle"></i></a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <main class="main-container diagonal-transition">
+                    <div class="hero-purple-block hidden-hero-text">
+                        <div class="hero-heading-white">Student Performance Tracker</div>
+                        <div class="intro intro-purple">
+                            Track, analyze, and improve academic performance for students, teachers, and admins—all in one place. Stay updated, manage progress, and make learning more effective with SPT.
+                        </div>
+                    </div>
+                    <div class="user-roles-section user-roles-no-bg">
+                        <div class="user-roles-heading">User Roles</div>
+                        <div class="user-roles-cards">
+                            <div class="user-role-card">
+                                <div class="role-btn-info">
+                                    <div class="round-btn" title="Student">
+                                        <i class="fa fa-user-graduate"></i>
+                                        <span>Student</span>
+                                    </div>
+                                    <div class="role-info-box">
+                                        <strong>Student</strong><br>
+                                        <span class="role-info-text">Access your marks, attendance, analysis, and personalized advice. Stay updated with news and fee info.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-role-card">
+                                <div class="role-btn-info">
+                                    <div class="round-btn" title="Teacher">
+                                        <i class="fa fa-chalkboard-teacher"></i>
+                                        <span>Teacher</span>
+                                    </div>
+                                    <div class="role-info-box">
+                                        <strong>Teacher</strong><br>
+                                        <span class="role-info-text">Update marks and attendance, view student performance, and provide feedback. Manage your class easily.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-role-card">
+                                <div class="role-btn-info">
+                                    <a href="pages/admin-login.html" class="round-btn" title="Admin" style="text-decoration:none;">
+                                        <i class="fa fa-user-shield"></i>
+                                        <span>Admin</span>
+                                    </a>
+                                    <div class="role-info-box">
+                                        <strong>Admin</strong><br>
+                                        <span class="role-info-text">Manage students, teachers, announcements, fees, and news. Keep the system running smoothly.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+                <!-- ...existing code... -->
+            </main>
+                        <!-- Signup section above the footer -->
+                        <div class="signup-section-wrapper">
+                            <div class="signup-container-home modern-signup-animate">
+                                <p class="signup-text">
+                                    Want to explore the Student Performance Tracker? Sign up here to access your role and continue seamlessly. Choose your signup option below:
+                                </p>
+                                <div class="signup-btn-group">
+                                    <a href="pages/student-signup.html" class="signup-btn signup-btn-role"><i class="fa fa-user-graduate"></i> Student Signup</a>
+                                    <a href="pages/teacher-signup.html" class="signup-btn signup-btn-role"><i class="fa fa-chalkboard-teacher"></i> Teacher Signup</a>
+                                    <a href="pages/admin-signup.html" class="signup-btn signup-btn-role"><i class="fa fa-user-shield"></i> Admin Signup</a>
+                                </div>
+                            </div>
+                        </div>
+            <footer style="text-align:center;color:#4b266b;padding:1.5rem 0 0.5rem 0;opacity:0.85;background:rgba(179,157,219,0.12);backdrop-filter:blur(2px);font-weight:600;letter-spacing:1px;border-radius:0 0 1.5rem 1.5rem;">
+                &copy; 2026 Student Performance Tracker. All rights reserved.
+            </footer>
+            <script>
+                // Initialize AOS
+                AOS.init({
+                    duration: 900,
+                    once: true,
+                    offset: 60
+                });
+            </script>
+        </body>
+        </html>
+                </div>
