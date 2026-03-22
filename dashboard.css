@@ -1,0 +1,50 @@
+/* dashboard.css
+   Additional styles for dashboards and cards
+*/
+.dashboard-section {
+    background: #f4f8ff;
+    min-height: 100vh;
+    padding: 3rem 0 2rem 0;
+}
+.dashboard-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.dashboard-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(79,140,255,0.10);
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    width: 320px;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s cubic-bezier(.4,0,.2,1);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+.dashboard-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(79,140,255,0.18);
+}
+.dashboard-card h3 {
+    color: #4f8cff;
+    margin-bottom: 0.7rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+@media (max-width: 900px) {
+    .dashboard-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    .dashboard-card {
+        width: 90%;
+        min-width: 260px;
+    }
+}
