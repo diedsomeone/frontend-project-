@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Started | Student Performance Tracker</title>
+  <link rel="stylesheet" href="../css/modern-home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Poppins', 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: url('../images/Asset/sptbacgr.png') center center/cover no-repeat fixed;
+      position: relative;
+    }
+    .bg-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: linear-gradient(120deg, rgba(30,0,60,0.7) 0%, rgba(44,0,77,0.7) 100%);
+      z-index: 0;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+    .bg-darken {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.45);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .get-started-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+    .get-started-heading {
+      color: #fff;
+      font-size: 2.3rem;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+      text-shadow: 0 2px 16px #3a3e9a55;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .get-started-subtitle {
+      color: #b39ddb;
+      font-size: 1.18rem;
+      font-weight: 500;
+      margin-bottom: 2.2rem;
+      text-align: center;
+    }
+    .role-cards {
+      display: flex;
+      flex-direction: row;
+      gap: 2.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .role-card {
+      background: rgba(255,255,255,0.23);
+      border-radius: 1.7rem;
+      box-shadow: 0 8px 32px 0 #0008, 0 2px 8px #b39ddb33;
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 2.2rem 2.2rem 1.7rem 2.2rem;
+      min-width: 220px;
+      max-width: 270px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+      position: relative;
+      z-index: 2;
+      border: 2px solid transparent;
+    }
+    .role-card:hover {
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 16px 48px #b39ddb99, 0 0px 24px #3a3e9a55;
+      background: rgba(179,157,219,0.22);
+      border: 2px solid #b39ddb;
+    }
+    .role-icon {
+      font-size: 2.7rem;
+      margin-bottom: 1.1rem;
+      color: #fff;
+      background: linear-gradient(135deg, #92119e 60%, #3a3e9a 100%);
+      border-radius: 50%;
+      padding: 0.7rem;
+      box-shadow: 0 2px 8px #b39ddb33;
+      transition: background 0.3s, color 0.3s;
+      text-shadow: 0 2px 8px #000a;
+    }
+    .role-card:hover .role-icon {
+      color: #fff;
+      background: linear-gradient(135deg, #3a3e9a 60%, #92119e 100%);
+    }
+    .role-title {
+      color: #fff;
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      text-align: center;
+      text-shadow: 0 4px 16px #000a, 0 1px 0 #b39ddb33;
+    }
+    .role-desc {
+      color: #e0e0e0;
+      font-size: 1.13rem;
+      text-align: center;
+      margin-bottom: 0.2rem;
+      font-weight: 600;
+      text-shadow: 0 2px 8px #000a, 0 1px 0 #b39ddb33;
+    }
+    .footer-modern {
+      width: 100vw;
+      text-align: center;
+      color: #fff;
+      background: rgba(44, 0, 77, 0.85);
+      padding: 1.2rem 0 0.7rem 0;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border-radius: 0 0 1.5rem 1.5rem;
+      font-size: 1.05rem;
+      position: relative;
+      z-index: 10;
+      margin-top: 2.5rem;
+      box-shadow: 0 -2px 16px #5f0a8722;
+    }
+    @media (max-width: 900px) {
+      .role-cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      .get-started-heading {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-overlay"></div>
+  <div class="bg-darken"></div>
+  <!-- Return to Home button moved below signup cards -->
+  <div class="get-started-container">
+    <div class="get-started-heading">Choose Your Signup Role</div>
+    <div class="get-started-subtitle">Select the appropriate signup option to continue.</div>
+    <div class="role-cards">
+      <div class="role-card" onclick="window.location.href='student-signup.html'">
+        <div class="role-icon"><i class="fa fa-user-graduate"></i></div>
+        <div class="role-title">Student Signup</div>
+        <div class="role-desc">Access your marks, attendance, and analysis.</div>
+      </div>
+      <div class="role-card" onclick="window.location.href='teacher-signup.html'">
+        <div class="role-icon"><i class="fa fa-chalkboard-teacher"></i></div>
+        <div class="role-title">Teacher Signup</div>
+        <div class="role-desc">Manage students, update marks, and feedback.</div>
+      </div>
+      <div class="role-card" onclick="window.location.href='admin-signup.html'">
+        <div class="role-icon"><i class="fa fa-user-shield"></i></div>
+        <div class="role-title">Admin Signup</div>
+        <div class="role-desc">Oversee system, manage users, and news.</div>
+      </div>
+    </div>
+    <a href="../index.html" class="return-home-btn" style="margin-top:1.7rem;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.5rem;background:rgba(255,255,255,0.18);backdrop-filter:blur(10px);border-radius:2rem;font-weight:700;font-size:1.08rem;color:#fff;box-shadow:0 2px 8px #b39ddb33;transition:background 0.2s,color 0.2s,transform 0.2s;">
+      <i class="fa fa-arrow-left"></i> Return to Home
+    </a>
+  </div>
+  <footer class="footer-modern">
+    &copy; 2026 Student Performance Tracker. All rights reserved.
+  </footer>
+</body>
+</html>

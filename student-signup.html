@@ -6,15 +6,241 @@
     <title>Student Signup</title>
     <link rel="stylesheet" href="../css/student-signup-modern.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', 'Inter', 'Segoe UI', Arial, sans-serif;
+            background: url('../images/Asset/student.png') center center/cover no-repeat fixed;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(120deg, rgba(30,0,60,0.7) 0%, rgba(44,0,77,0.7) 100%);
+            z-index: 0;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+        }
+        .bg-darken {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.45);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .student-signup-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: none; }
+        }
+        .student-signup-header {
+            color: #fff;
+            font-size: 2.3rem;
+            font-weight: 800;
+            margin-bottom: 0.7rem;
+            text-shadow: 0 2px 16px #3a3e9a55;
+            letter-spacing: 1px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            justify-content: center;
+            animation: fadeInDown 1.1s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-40px); }
+            100% { opacity: 1; transform: none; }
+        }
+        .student-signup-card {
+            background: rgba(255,255,255,0.22);
+            border-radius: 2rem;
+            box-shadow: 0 8px 32px 0 #0008, 0 2px 8px #b39ddb33;
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 2.5rem 2.5rem 2.2rem 2.5rem;
+            max-width: 430px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2.5rem auto 2.5rem auto;
+            z-index: 2;
+            animation: fadeInUp 1.5s cubic-bezier(.23,1.01,.32,1) both;
+            transition: box-shadow 0.3s, background 0.3s;
+        }
+        .student-signup-card:hover {
+            box-shadow: 0 16px 48px #b39ddb99, 0 0px 24px #3a3e9a55;
+            background: rgba(179,157,219,0.22);
+        }
+        .student-signup-img {
+            width: 120px;
+            border-radius: 1.2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 16px rgba(60,100,180,0.10);
+            animation: fadeIn 1.2s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .signup-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.1rem;
+            margin-top: 0.5rem;
+        }
+        .signup-form label {
+            color: #4f8cff;
+            font-weight: 700;
+            font-size: 1.08rem;
+            margin-bottom: 0.2rem;
+            align-self: flex-start;
+        }
+        .signup-form input {
+            width: 100%;
+            padding: 0.8rem 1.1rem;
+            border-radius: 0.9rem;
+            border: 1.5px solid #b39ddb99;
+            font-size: 1.08rem;
+            background: #fff;
+            outline: none;
+            margin-bottom: 0.2rem;
+            transition: border 0.2s;
+            color: #3a3e9a;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+        .signup-form select {
+            width: 100%;
+            padding: 0.8rem 1.1rem;
+            border-radius: 0.9rem;
+            border: 1.5px solid #b39ddb99;
+            font-size: 1.08rem;
+            background: #fff;
+            outline: none;
+            margin-bottom: 0.2rem;
+            transition: border 0.2s;
+            color: #3a3e9a;
+            font-family: inherit;
+            box-sizing: border-box;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        .signup-form select:focus {
+            border: 1.5px solid #92119e;
+        }
+        .signup-form input:focus {
+            border: 1.5px solid #92119e;
+        }
+        .signup-btn {
+            background: linear-gradient(90deg, #92119e 0%, #3a3e9a 100%);
+            color: #fff;
+            border: none;
+            border-radius: 2rem;
+            padding: 1rem 2.2rem;
+            font-size: 1.13rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 16px #b39ddb55, 0 0px 16px #3a3e9a33;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            outline: none;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 0.7rem;
+        }
+        .signup-btn:hover {
+            background: linear-gradient(90deg, #3a3e9a 0%, #92119e 100%);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 32px #b39ddb99, 0 0px 24px #3a3e9a55;
+            filter: brightness(1.1);
+        }
+        @media (max-width: 600px) {
+            .student-signup-header {
+                font-size: 1.5rem;
+                padding: 0.7rem 1rem 0.7rem 1rem;
+            }
+            .student-signup-card {
+                padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+                max-width: 98vw;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="student-signup-bg">
+    <div class="bg-overlay"></div>
+    <div class="bg-darken"></div>
+    <div class="student-signup-container">
         <div class="student-signup-header">
             <i class="fa fa-user-graduate"></i> Student Signup
         </div>
         <div class="student-signup-card">
-            <img src="../images/Asset/student.png" alt="Student Logo" class="student-signup-img">
-            <iframe src="modern-signup.html" style="border:none; width: 100%; height: 700px; border-radius: 24px; box-shadow: 0 8px 32px rgba(60,100,180,0.12); background: #fff;" title="Modern Signup"></iframe>
+            <!-- Student icon removed as requested -->
+            <form class="signup-form" autocomplete="off">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter your name" required>
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <label for="rollNumber">Roll Number</label>
+                <input type="text" id="rollNumber" name="rollNumber" placeholder="Enter roll number" required>
+                <label for="department">Department</label>
+                <select id="department" name="department" required>
+                    <option value="">Select department</option>
+                    <option value="CSE">Computer Science</option>
+                    <option value="ECE">Electronics</option>
+                    <option value="ME">Mechanical</option>
+                    <option value="CE">Civil</option>
+                    <option value="EE">Electrical</option>
+                    <option value="Other">Other</option>
+                </select>
+                <label for="semester">Semester</label>
+                <select id="semester" name="semester" required>
+                    <option value="">Select semester</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+                <label for="password">Password</label>
+                <div style="width:100%;position:relative;">
+                    <input type="password" id="password" name="password" placeholder="Create a password" required style="width:100%;padding-right:2.5rem;">
+                    <span class="toggle-password" id="togglePassword" style="position:absolute;right:0.8rem;top:50%;transform:translateY(-50%);cursor:pointer;color:#b0b0b0;font-size:1.1rem;"><i class="fa fa-eye"></i></span>
+                </div>
+                <label for="confirmPassword">Confirm Password</label>
+                <div style="width:100%;position:relative;">
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required style="width:100%;padding-right:2.5rem;">
+                    <span class="toggle-password" id="toggleConfirmPassword" style="position:absolute;right:0.8rem;top:50%;transform:translateY(-50%);cursor:pointer;color:#b0b0b0;font-size:1.1rem;"><i class="fa fa-eye"></i></span>
+                </div>
+                <div class="checkbox-group" style="display:flex;align-items:center;gap:0.7rem;margin-top:0.5rem;width:100%;flex-direction:row;">
+                    <input type="checkbox" id="terms" name="terms" required style="width:22px;height:22px;accent-color:#92119e;cursor:pointer;">
+                      <label for="terms" style="font-size:1rem;line-height:1.2;cursor:pointer;color:#4f8cff;">I agree to the <a href="#" style="color:#4f8cff;text-decoration:underline;">Terms & Conditions</a></label>
+                </div>
+                <button type="submit" class="signup-btn" style="margin-top:1.1rem;"><i class="fa fa-user-plus"></i> Sign Up</button>
+            </form>
+            <a href="../index.html" class="return-home-btn" style="margin-top:1.7rem;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.5rem;background:rgba(255,255,255,0.18);backdrop-filter:blur(10px);border-radius:2rem;font-weight:700;font-size:1.08rem;color:#fff;box-shadow:0 2px 8px #b39ddb33;transition:background 0.2s,color 0.2s,transform 0.2s;">
+              <i class="fa fa-arrow-left"></i> Return to Home
+            </a>
         </div>
     </div>
 </body>

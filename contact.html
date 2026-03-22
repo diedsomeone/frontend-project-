@@ -7,63 +7,254 @@
     <link rel="stylesheet" href="../css/style.css">
     <script defer src="../js/main.js"></script>
 </head>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+    html, body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', 'Inter', 'Segoe UI', Arial, sans-serif;
+        background: url('../images/Asset/contact.png') center center/cover no-repeat fixed;
+        position: relative;
+        overflow-x: hidden;
+    }
+    .bg-overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: linear-gradient(120deg, rgba(30,0,60,0.7) 0%, rgba(44,0,77,0.7) 100%);
+        z-index: 0;
+        pointer-events: none;
+        mix-blend-mode: multiply;
+    }
+    .bg-darken {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.45);
+        z-index: 1;
+        pointer-events: none;
+    }
+    .navbar-modern {
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0.7rem 0 0.7rem 2.2rem;
+        background: rgba(255,255,255,0.10);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 16px 0 #5f0a8722;
+        position: relative;
+        z-index: 10;
+    }
+    .navbar-links {
+        display: flex;
+        align-items: center;
+        gap: 1.1rem;
+        margin-left: auto;
+        margin-right: 2.5rem;
+    }
+    .navbar-link {
+        color: #fff;
+        background: rgba(146, 17, 158, 0.13);
+        border-radius: 2rem;
+        padding: 0.5rem 1.4rem;
+        font-weight: 600;
+        font-size: 1.08rem;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s, transform 0.2s;
+        box-shadow: 0 2px 8px #b39ddb22;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .navbar-link.active, .navbar-link:hover {
+        background: linear-gradient(90deg, #92119e 60%, #3a3e9a 100%);
+        color: #fff;
+        transform: translateY(-2px) scale(1.04);
+        box-shadow: 0 4px 16px #b39ddb33;
+    }
+    .contact-section {
+        position: relative;
+        z-index: 2;
+        padding: 4rem 0 2rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 80vh;
+    }
+    .section-title {
+        color: #fff;
+        font-size: 2.3rem;
+        font-weight: 800;
+        margin-bottom: 1.2rem;
+        text-shadow: 0 4px 16px #000a, 0 1px 0 #b39ddb33;
+        letter-spacing: 1px;
+        text-align: center;
+    }
+    .section-desc {
+        color: #e0e0e0;
+        font-size: 1.18rem;
+        font-weight: 600;
+        margin-bottom: 2.2rem;
+        text-align: center;
+        text-shadow: 0 2px 8px #000a, 0 1px 0 #b39ddb33;
+        line-height: 1.6;
+        max-width: 700px;
+    }
+    .contact-card {
+        background: rgba(255,255,255,0.23);
+        border-radius: 1.7rem;
+        box-shadow: 0 8px 32px 0 #0008, 0 2px 8px #b39ddb33;
+        backdrop-filter: blur(22px);
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 2.2rem 2rem 1.5rem 2rem;
+        min-width: 220px;
+        max-width: 500px;
+        width: 100%;
+        margin: 0 auto 2rem auto;
+        position: relative;
+        z-index: 2;
+    }
+    .contact-form label {
+        color: #4f8cff;
+        font-weight: 800;
+        font-size: 1.09rem;
+        margin-bottom: 0.2rem;
+        text-shadow: 0 1px 2px #fff8, 0 0px 1px #0002;
+    }
+    .contact-form input,
+    .contact-form textarea {
+        width: 90%;
+        padding: 0.6rem 0.9rem;
+        border-radius: 0.7rem;
+        border: 1.5px solid #b39ddb99;
+        font-size: 1rem;
+        background: #f7faff;
+        outline: none;
+        margin-top: 0.3rem;
+        margin-bottom: 0.8rem;
+        transition: border 0.2s;
+        color: #4f8cff;
+        font-family: inherit;
+        box-sizing: border-box;
+        font-weight: 600;
+        text-shadow: 0 1px 2px #fff8, 0 0px 1px #0002;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        border: 1.7px solid #92119e;
+    }
+    .btn-primary {
+        background: linear-gradient(90deg, #92119e 0%, #3a3e9a 100%);
+        color: #fff;
+        border: none;
+        border-radius: 2rem;
+        padding: 1rem 2.2rem;
+        font-size: 1.13rem;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: 0 4px 16px #b39ddb55, 0 0px 16px #3a3e9a33;
+        transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        outline: none;
+        letter-spacing: 0.5px;
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 2px 8px #000a, 0 1px 0 #92119e33;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+    .btn-primary:hover {
+        background: linear-gradient(90deg, #3a3e9a 0%, #92119e 100%);
+        transform: scale(1.05) translateY(-2px);
+        box-shadow: 0 8px 32px #b39ddb99, 0 0px 24px #3a3e9a55;
+        filter: brightness(1.1);
+    }
+    .btn-outline {
+        background: #fff;
+        color: #92119e;
+        border: 1.7px solid #b39ddb;
+        border-radius: 2rem;
+        padding: 0.9rem 2.2rem;
+        font-size: 1.08rem;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 1rem;
+        box-shadow: 0 2px 8px #b39ddb22;
+        transition: background 0.3s, color 0.3s, transform 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .btn-outline:hover {
+        background: #b39ddb22;
+        color: #3a3e9a;
+        transform: scale(1.04);
+    }
+    .footer-modern {
+        width: 100vw;
+        text-align: center;
+        color: #fff;
+        background: rgba(44, 0, 77, 0.85);
+        padding: 1.2rem 0 0.7rem 0;
+        font-weight: 600;
+        letter-spacing: 1px;
+        border-radius: 0 0 1.5rem 1.5rem;
+        font-size: 1.05rem;
+        position: relative;
+        z-index: 10;
+        margin-top: 2.5rem;
+        box-shadow: 0 -2px 16px #5f0a8722;
+    }
+    @media (max-width: 900px) {
+        .contact-section {
+            padding: 2.5rem 0 1rem 0;
+        }
+        .section-title {
+            font-size: 1.7rem;
+        }
+        .contact-card {
+            padding: 1.5rem 0.7rem 1.2rem 0.7rem;
+        }
+    }
+</style>
 <body>
-    <!-- Navigation Menu -->
-    <nav class="navbar">
-        <div class="container nav-container">
-            <div class="logo">SPT</div>
-            <ul class="nav-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="student-login.html">Student Login</a></li>
-                <li><a href="teacher-login.html">Teacher Login</a></li>
-                <li><a href="admin-login.html">Admin Login</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
-            </ul>
+    <div class="bg-overlay"></div>
+    <div class="bg-darken"></div>
+    <nav class="navbar-modern">
+        <div class="navbar-links">
+            <a href="../index.html" class="navbar-link"><i class="fa fa-home"></i> Home</a>
+            <a href="student-login.html" class="navbar-link"><i class="fa fa-user-graduate"></i> Student Login</a>
+            <a href="teacher-login.html" class="navbar-link"><i class="fa fa-chalkboard-teacher"></i> Teacher Login</a>
+            <a href="admin-login.html" class="navbar-link"><i class="fa fa-user-shield"></i> Admin Login</a>
+            <a href="contact.html" class="navbar-link active"><i class="fa fa-envelope"></i> Contact</a>
         </div>
     </nav>
-    <section class="container fadein-section" style="padding:3rem 0 2rem 0;">
-        <h1 class="section-title animated fadeInDown">Contact Us</h1>
-        <p class="animated fadeInUp" style="max-width:700px;margin:0 auto 2rem auto;font-size:1.15rem;line-height:1.7;">
+    <section class="contact-section">
+        <h1 class="section-title">Contact Us</h1>
+        <p class="section-desc">
             Have questions, feedback, or need support? Reach out to us using the form below. We value your input and are here to help you make the most of the Student Performance Tracker.
         </p>
-        <div class="contact-card animated fadeInUp" style="max-width:500px;margin:0 auto 2rem auto;background:#fff;border-radius:1.5rem;box-shadow:0 8px 32px 0 rgba(79,140,255,0.13);padding:2.2rem 2rem 1.5rem 2rem;">
-            <form class="contact-form" autocomplete="off">
-                <div class="input-group" style="margin-bottom:1.2rem;">
-                    <label for="name" style="font-weight:600;display:flex;align-items:center;gap:0.5rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#4f8cff" d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm7 2h-1.26a8.96 8.96 0 0 1-11.48 0H5a3 3 0 0 0-3 3v2.25A2.75 2.75 0 0 0 4.75 20h14.5A2.75 2.75 0 0 0 22 17.25V15a3 3 0 0 0-3-3Z"/></svg>
-                        Name
-                    </label>
-                    <input type="text" id="name" name="name" placeholder="Your Name" required style="margin-top:0.3rem;">
-                </div>
-                <div class="input-group" style="margin-bottom:1.2rem;">
-                    <label for="email" style="font-weight:600;display:flex;align-items:center;gap:0.5rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#4f8cff" d="M2 6.75A2.75 2.75 0 0 1 4.75 4h14.5A2.75 2.75 0 0 1 22 6.75v10.5A2.75 2.75 0 0 1 19.25 20H4.75A2.75 2.75 0 0 1 2 17.25V6.75Zm2.53.53a.75.75 0 0 0-.53.72v0.06l8 5.25 8-5.25v-0.06a.75.75 0 0 0-.53-.72.75.75 0 0 0-.72.11L12 11.19 5.75 7.39a.75.75 0 0 0-.72-.11Z"/></svg>
-                        Email
-                    </label>
-                    <input type="email" id="email" name="email" placeholder="you@example.com" required style="margin-top:0.3rem;">
-                </div>
-                <div class="input-group" style="margin-bottom:1.2rem;">
-                    <label for="message" style="font-weight:600;display:flex;align-items:center;gap:0.5rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#4f8cff" d="M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h10v2H4v-2zm0 4h7v2H4v-2z"/></svg>
-                        Message
-                    </label>
-                    <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required style="margin-top:0.3rem;"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="margin-top:0.5rem;display:flex;align-items:center;gap:0.5rem;justify-content:center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#fff" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-                    Send Message
+        <div class="contact-card">
+                <h2 class="contact-form-title" style="text-align:center;margin-bottom:1.1rem;font-size:1.35rem;font-weight:800;color:#4f8cff;letter-spacing:0.5px;text-shadow:0 1px 2px #fff8,0 0px 1px #0002;">Contact Form</h2>
+                <form class="contact-form" autocomplete="off">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required></textarea>
+                <button type="submit" class="btn-primary">
+                    <i class="fa fa-paper-plane"></i> Send Message
                 </button>
             </form>
         </div>
         <div style="text-align:center;margin-top:2.5rem;">
-            <a href="../index.html" class="btn btn-outline">Return to Home Page</a>
+            <a href="../index.html" class="btn-outline">Return to Home Page</a>
         </div>
     </section>
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Student Performance Tracker. All rights reserved.</p>
-        </div>
+    <footer class="footer-modern">
+        &copy; 2026 Student Performance Tracker. All rights reserved.
     </footer>
     <script>
     // Simple form animation and fake submit
