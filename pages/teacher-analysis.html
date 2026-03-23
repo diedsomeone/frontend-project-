@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analysis | Teacher Dashboard</title>
+  <link rel="stylesheet" href="../css/student-dashboard-modern.css" />
+  <style>
+    body { background: #f7f5ff; }
+    .teacher-navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 22px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 2.5rem;
+      margin: 32px auto 36px auto;
+      padding: 14px 44px;
+      box-shadow: 0 4px 24px 0 rgba(120, 90, 200, 0.10);
+      width: fit-content;
+      position: relative;
+      z-index: 2;
+    }
+    .teacher-navbar a {
+      text-decoration: none;
+      color: #4B3869;
+      font-weight: 600;
+      font-size: 1.08rem;
+      padding: 10px 28px;
+      border-radius: 2rem;
+      background: linear-gradient(90deg, rgba(180,167,255,0.13), rgba(255,210,245,0.13));
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px 0 rgba(180, 167, 255, 0.08);
+      letter-spacing: 0.01em;
+      margin: 0 2px;
+      position: relative;
+    }
+    .teacher-navbar a:hover, .teacher-navbar a.active {
+      background: linear-gradient(90deg, #b4a7ff 0%, #ffd2f5 100%);
+      color: #fff;
+      box-shadow: 0 4px 16px 0 rgba(120, 90, 200, 0.13);
+      text-shadow: 0 2px 8px rgba(180,167,255,0.10);
+      transform: translateY(-2px) scale(1.04);
+    }
+    .main-section { max-width: 1100px; margin: 0 auto; padding: 40px 0; }
+    .section-title { font-size: 2rem; font-weight: 800; color: #4B3869; margin-bottom: 18px; }
+    .analysis-cards { display: flex; flex-wrap: wrap; gap: 24px; }
+    .analysis-card { flex: 1 1 320px; background: rgba(255,255,255,0.85); border-radius: 1.2rem; box-shadow: 0 4px 24px 0 rgba(120, 90, 200, 0.08); padding: 28px 24px; min-width: 320px; }
+    .analysis-card-title { font-size: 1.18rem; font-weight: 700; color: #3a2e5c; margin-bottom: 10px; }
+    .analysis-card-content { font-size: 1.04rem; color: #5a4b7c; }
+    .chart-container { margin-top: 24px; background: #f3eaff; border-radius: 1.2rem; padding: 18px; }
+    @media (max-width: 900px) {
+      .teacher-navbar {
+        flex-wrap: wrap;
+        padding: 10px 8px;
+        gap: 10px;
+      }
+      .teacher-navbar a {
+        font-size: 1rem;
+        padding: 8px 16px;
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav class="teacher-navbar">
+    <a href="../index.html">Home</a>
+    <a href="teacher-dashboard.html">Dashboard</a>
+    <a href="teacher-attendance.html">Attendance</a>
+    <a href="teacher-marks.html">Marks</a>
+    <a href="teacher-analysis.html" class="active">Analysis</a>
+    <a href="teacher-feedback.html">Feedback</a>
+    <a href="teacher-reports.html">Reports</a>
+    <a href="teacher-logout.html">Logout</a>
+  </nav>
+  <div class="main-section">
+    <div class="section-title">Class Analysis</div>
+    <div class="analysis-cards">
+      <div class="analysis-card">
+        <div class="analysis-card-title">Top Performers</div>
+        <div class="analysis-card-content">Amit Sharma, Priya Singh</div>
+      </div>
+      <div class="analysis-card">
+        <div class="analysis-card-title">Weak Performers</div>
+        <div class="analysis-card-content">Neha Patel</div>
+      </div>
+      <div class="analysis-card">
+        <div class="analysis-card-title">Class Average</div>
+        <div class="analysis-card-content">87%</div>
+      </div>
+      <div class="analysis-card">
+        <div class="analysis-card-title">Subject Trends</div>
+        <div class="analysis-card-content">Mathematics ↑, Computer →</div>
+      </div>
+    </div>
+    <div class="chart-container">
+      <canvas id="analysisChart" height="100"></canvas>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const ctx = document.getElementById('analysisChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Mathematics', 'Computer'],
+          datasets: [{
+            label: 'Class Avg (%)',
+            data: [87, 89],
+            backgroundColor: ['#b4a7ff', '#ffd2f5'],
+            borderRadius: 8
+          }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: {
+            y: {
+              min: 60,
+              max: 100,
+              ticks: { color: '#4B3869', font: { weight: 'bold' } },
+              grid: { color: 'rgba(180,167,255,0.10)' }
+            },
+            x: {
+              ticks: { color: '#4B3869', font: { weight: 'bold' } },
+              grid: { color: 'rgba(180,167,255,0.10)' }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

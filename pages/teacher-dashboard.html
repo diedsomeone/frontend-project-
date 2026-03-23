@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard | Student Performance Tracker</title>
+  <link rel="stylesheet" href="../css/student-dashboard-modern.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      background: url('../images/Asset/dashboard.png') center center/cover no-repeat fixed;
+      min-height: 100vh;
+      position: relative;
+    }
+    .bg-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: linear-gradient(120deg, rgba(146,17,158,0.22) 0%, rgba(58,62,154,0.22) 100%);
+      z-index: 0;
+      pointer-events: none;
+      mix-blend-mode: lighten;
+    }
+    .teacher-dashboard-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 40px 0 60px 0;
+    }
+    .teacher-navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 2.5rem;
+      margin: 32px auto 36px auto;
+      padding: 14px 40px;
+      box-shadow: 0 4px 24px 0 rgba(120, 90, 200, 0.08);
+      width: fit-content;
+    }
+    .teacher-navbar a {
+      text-decoration: none;
+      color: #4B3869;
+      font-weight: 600;
+      font-size: 1.08rem;
+      padding: 10px 24px;
+      border-radius: 2rem;
+      background: linear-gradient(90deg, rgba(180,167,255,0.13), rgba(255,210,245,0.13));
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .teacher-navbar a:hover, .teacher-navbar a.active {
+      background: linear-gradient(90deg, #b4a7ff 0%, #ffd2f5 100%);
+      color: #fff;
+      box-shadow: 0 2px 12px 0 rgba(120, 90, 200, 0.13);
+    }
+    .teacher-hero {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      margin-bottom: 38px;
+      background: rgba(255,255,255,0.55);
+      border-radius: 2rem;
+      padding: 36px 40px 36px 32px;
+      box-shadow: 0 6px 32px 0 rgba(120, 90, 200, 0.10);
+      position: relative;
+    }
+    .teacher-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #b4a7ff;
+      box-shadow: 0 2px 12px 0 rgba(120, 90, 200, 0.13);
+    }
+    .teacher-hero-info {
+      flex: 1;
+    }
+    .teacher-hero-info h1 {
+      margin: 0 0 8px 0;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #3a2e5c;
+    }
+    .teacher-hero-info p {
+      margin: 0 0 12px 0;
+      font-size: 1.15rem;
+      color: #6d5c8a;
+    }
+    .teacher-quick-cards {
+      display: flex;
+      gap: 18px;
+      margin-top: 10px;
+    }
+    .teacher-quick-card {
+      background: linear-gradient(120deg, #e9e4ff 60%, #ffe3f3 100%);
+      border-radius: 1.2rem;
+      padding: 18px 28px;
+      box-shadow: 0 2px 12px 0 rgba(180, 167, 255, 0.10);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 140px;
+    }
+    .teacher-quick-title {
+      font-size: 0.98rem;
+      color: #7c6bb3;
+      font-weight: 500;
+    }
+    .teacher-quick-value {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #4B3869;
+      margin-top: 2px;
+    }
+    .teacher-dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px;
+      margin-top: 18px;
+    }
+    .teacher-dashboard-card {
+      background: rgba(255,255,255,0.75);
+      border-radius: 1.5rem;
+      box-shadow: 0 6px 32px 0 rgba(120, 90, 200, 0.10);
+      padding: 28px 26px 24px 26px;
+      position: relative;
+      transition: transform 0.18s, box-shadow 0.18s;
+      backdrop-filter: blur(2.5px);
+      border: 1.5px solid rgba(180,167,255,0.13);
+    }
+    .teacher-dashboard-card:hover {
+      transform: translateY(-8px) scale(1.025);
+      box-shadow: 0 12px 36px 0 rgba(120, 90, 200, 0.16);
+    }
+    .teacher-card-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: #3a2e5c;
+      margin-bottom: 10px;
+    }
+    .teacher-card-content {
+      font-size: 1.04rem;
+      color: #5a4b7c;
+    }
+    .edit-profile-btn {
+      background: linear-gradient(90deg, #b4a7ff 0%, #ffd2f5 100%);
+      color: #fff;
+      border: none;
+      border-radius: 1.2rem;
+      padding: 7px 18px;
+      font-size: 0.98rem;
+      font-weight: 500;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: background 0.18s, box-shadow 0.18s;
+      box-shadow: 0 2px 8px 0 rgba(180, 167, 255, 0.10);
+    }
+    .edit-profile-btn:hover {
+      background: linear-gradient(90deg, #a18aff 0%, #ffb6e6 100%);
+      box-shadow: 0 4px 16px 0 rgba(180, 167, 255, 0.18);
+    }
+    .teacher-action-btn {
+      background: linear-gradient(90deg, #b4a7ff 0%, #ffd2f5 100%);
+      color: #fff;
+      border: none;
+      border-radius: 1.2rem;
+      padding: 10px 22px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 6px 8px 0 0;
+      cursor: pointer;
+      transition: background 0.18s, box-shadow 0.18s;
+      box-shadow: 0 2px 8px 0 rgba(180, 167, 255, 0.10);
+      display: inline-block;
+    }
+    .teacher-action-btn:hover {
+      background: linear-gradient(90deg, #a18aff 0%, #ffb6e6 100%);
+      box-shadow: 0 4px 16px 0 rgba(180, 167, 255, 0.18);
+    }
+    .teacher-alert {
+      background: linear-gradient(90deg, #fff3e0 0%, #ffe3f3 100%);
+      color: #b26a00;
+      border-radius: 1.2rem;
+      padding: 12px 18px;
+      margin-bottom: 8px;
+      font-size: 1.01rem;
+      font-weight: 600;
+      box-shadow: 0 2px 8px 0 rgba(255, 193, 7, 0.10);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .teacher-alert strong {
+      color: #d84315;
+    }
+    .teacher-progress-bar {
+      width: 100%;
+      height: 14px;
+      background: #ede7f6;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .teacher-progress-bar-inner {
+      height: 100%;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #6a0080 0%, #b39ddb 100%);
+      transition: width 0.5s;
+    }
+    .student-attendance-warning {
+      background: #fff8e1;
+      color: #b26a00;
+      border-radius: 0.8rem;
+      padding: 6px 12px;
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+    .student-attendance-ok {
+      background: #e8f5e9;
+      color: #388e3c;
+      border-radius: 0.8rem;
+      padding: 6px 12px;
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+    @media (max-width: 900px) {
+      .teacher-dashboard-container {
+        padding: 24px 8px 40px 8px;
+      }
+      .teacher-hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 16px;
+        gap: 18px;
+      }
+      .teacher-dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-overlay"></div>
+  <div class="teacher-dashboard-container">
+    <!-- Navigation Bar -->
+    <nav class="teacher-navbar">
+      <a href="../index.html">Home</a>
+      <a href="teacher-dashboard.html" class="active">Dashboard</a>
+      <a href="teacher-attendance.html">Attendance</a>
+      <a href="teacher-marks.html">Marks</a>
+      <a href="teacher-analysis.html">Analysis</a>
+      <a href="teacher-feedback.html">Feedback</a>
+      <a href="teacher-reports.html">Reports</a>
+      <a href="teacher-logout.html">Logout</a>
+    </nav>
+    <!-- Hero Section -->
+    <section class="teacher-hero">
+      <img src="../images/Asset/avatar-default.png" alt="Teacher Avatar" class="teacher-avatar" />
+      <div class="teacher-hero-info">
+        <h1>Welcome back, Professor Meena</h1>
+        <p>Manage student progress, attendance, and academic insights efficiently</p>
+        <div class="teacher-quick-cards">
+          <div class="teacher-quick-card">
+            <span class="teacher-quick-title">Total Students</span>
+            <span class="teacher-quick-value">42</span>
+          </div>
+          <div class="teacher-quick-card">
+            <span class="teacher-quick-title">Today's Tasks</span>
+            <span class="teacher-quick-value">3</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Dashboard Grid -->
+    <div class="teacher-dashboard-grid">
+      <!-- Teacher Profile Summary Card -->
+      <div class="teacher-dashboard-card">
+        <div class="teacher-card-title">Profile Summary</div>
+        <div class="teacher-card-content">
+          <div><b>Name:</b> Prof. Meena Kumari</div>
+          <div><b>Employee ID:</b> T-1023</div>
+          <div><b>Department:</b> Computer Science</div>
+          <div><b>Subjects:</b> Mathematics, Computer</div>
+          <div><b>Email:</b> meena.kumari@email.com</div>
+          <button class="edit-profile-btn">Edit Profile</button>
+        </div>
+      </div>
+      <!-- Class Overview Cards -->
+      <div class="teacher-dashboard-card">
+        <div class="teacher-card-title">Class Overview</div>
+        <div class="teacher-card-content">
+          <div><b>Total Students:</b> 42</div>
+          <div><b>Classes Managed:</b> 3</div>
+          <div><b>Pending Evaluations:</b> 2</div>
+          <div><b>Attendance Updated Today:</b> Yes</div>
+          <div><b>Avg. Class Performance:</b> 87%</div>
+          <div><b>Students Needing Attention:</b> 4</div>
+        </div>
+      </div>
+      <!-- Attendance Management Section -->
+      <div class="teacher-dashboard-card">
+        <div class="teacher-card-title">Attendance Management</div>
+        <div class="teacher-card-content">
+          <div style="margin-bottom:10px;"><b>Update Attendance</b></div>
+          <div style="margin-bottom:10px;">
+            <div><b>Student:</b> Amit Sharma <span class="student-attendance-ok">96%</span></div>
+            <div><b>Student:</b> Priya Singh <span class="student-attendance-warning">72%</span></div>
+            <div><b>Student:</b> Rahul Verma <span class="student-attendance-ok">89%</span></div>
+            <div><b>Student:</b> Neha Patel <span class="student-attendance-warning">68%</span></div>
+          </div>
+          <button class="teacher-action-btn">Update Attendance</button>
+        </div>
+      </div>
+      <!-- Marks Management Section -->
+      <div class="teacher-dashboard-card">
+        <div class="teacher-card-title">Marks Management</div>
+        <div class="teacher-card-content">
+          <div style="margin-bottom:10px;"><b>Update Marks</b></div>
+          <div style="margin-bottom:10px;">
+            <div><b>Amit Sharma:</b> Mathematics: 92, Computer: 95</div>
+            <div><b>Priya Singh:</b> Mathematics: 88, Computer: 99</div>
+            <div><b>Rahul Verma:</b> Mathematics: 85, Computer: 90</div>
+            <div><b>Neha Patel:</b> Mathematics: 78, Computer: 82</div>
+          </div>
+          <button class="teacher-action-btn">Update Marks</button>
+        </div>
+      </div>
+      <!-- Class Performance Graph Section -->
+      <div class="teacher-dashboard-card" style="grid-column: span 2;">
+        <div class="teacher-card-title">Class Performance Graph</div>
+        <div class="teacher-card-content">
+          <canvas id="classPerformanceChart" height="120"></canvas>
+        </div>
+      </div>
+      <!-- Student Analysis Section -->
+      <div class="teacher-dashboard-card">
+        <div class="teacher-card-title">Student Analysis</div>
+        <div class="teacher-card-content">
+          <div><b>Top Performers:</b> Amit Sharma, Priya Singh</div>
+          <div><b>Weak Performers:</b> Neha Patel</div>
+          <div><b>Class Average:</b> 87%</div>
+          <div><b>Subject Trends:</b> Mathematics ↑, Computer →</div>
+        </div>
+      </div>
+      <!-- Feedback and Remarks Section -->
+      <div class="teacher-dashboard-card">
+        <div class="teacher-card-title">Feedback & Remarks</div>
+        <div class="teacher-card-content">
+          <div>Excellent progress</div>
+          <div>Needs more consistency</div>
+          <div>Attendance should improve</div>
+          <div>Strong performance in Mathematics</div>
+          <button class="teacher-action-btn">Give Feedback</button>
+        </div>
+      </div>
+      <!-- Alerts / Academic Attention Panel -->
+      <div class="teacher-dashboard-card">
+        <div class="teacher-card-title">Alerts & Academic Attention</div>
+        <div class="teacher-card-content">
+          <div class="teacher-alert"><strong>3</strong> students below 75% attendance</div>
+          <div class="teacher-alert"><strong>2</strong> students need marks update</div>
+          <div class="teacher-alert"><strong>1</strong> pending feedback report</div>
+        </div>
+      </div>
+      <!-- Quick Actions Section -->
+      <div class="teacher-dashboard-card">
+        <div class="teacher-card-title">Quick Actions</div>
+        <div class="teacher-card-content">
+          <button class="teacher-action-btn">Update Attendance</button>
+          <button class="teacher-action-btn">Update Marks</button>
+          <button class="teacher-action-btn">View Reports</button>
+          <button class="teacher-action-btn">Send Feedback</button>
+          <button class="teacher-action-btn">Analyze Class</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Class Performance Graph (Chart.js)
+    document.addEventListener('DOMContentLoaded', function () {
+      const ctx = document.getElementById('classPerformanceChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
+          datasets: [{
+            label: 'Class Avg (%)',
+            data: [82, 85, 88, 91, 87],
+            fill: true,
+            backgroundColor: 'rgba(180,167,255,0.13)',
+            borderColor: '#b4a7ff',
+            borderWidth: 3,
+            pointBackgroundColor: '#fff',
+            pointBorderColor: '#b4a7ff',
+            pointRadius: 5,
+            tension: 0.4,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              min: 70,
+              max: 100,
+              ticks: {
+                color: '#4B3869',
+                font: { weight: 'bold' }
+              },
+              grid: {
+                color: 'rgba(180,167,255,0.10)'
+              }
+            },
+            x: {
+              ticks: {
+                color: '#4B3869',
+                font: { weight: 'bold' }
+              },
+              grid: {
+                color: 'rgba(180,167,255,0.10)'
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marks Overview | Student Performance Tracker</title>
+  <link rel="stylesheet" href="../css/student-dashboard-modern.css" />
+</head>
+<body style="background: url('../images/Asset/dashboard.png') center center/cover no-repeat fixed; position: relative; min-height: 100vh;">
+  <div class="bg-overlay"></div>
+  <div class="dashboard-container" style="position:relative;z-index:1;">
+    <nav class="navbar">
+      <a href="../index.html">Home</a>
+      <a href="student-dashboard.html">Dashboard</a>
+      <a href="#" class="active">Marks</a>
+      <a href="student-analysis.html">Analysis</a>
+      <a href="student-fees.html">Fees</a>
+      <a href="#">News</a>
+      <a href="#">Logout</a>
+    </nav>
+    <section class="marks-hero">
+      <div class="marks-title">Marks Overview</div>
+      <div class="marks-subtitle">Subject-wise marks, remarks, and performance summary</div>
+      <div style="color:#6a0080;font-size:1.08rem;font-weight:600;">Academic Year: 2025-26 | Semester: 4th</div>
+      <div style="color:#7c6bb3;font-size:1.01rem;">Student: <b>Amit Sharma</b> (Roll No: 21CS102)</div>
+    </section>
+    <div class="dashboard-grid">
+      <div class="dashboard-card">
+        <div class="card-title">Subject Marks</div>
+        <div class="card-content">
+          <div class="subject-row" style="background: linear-gradient(90deg, #e9e4ff 60%, #ffe3f3 100%);">
+            <span class="subject-icon" style="color:#6a0080;font-size:1.3rem;margin-right:8px;">&#x1F522;</span>
+            <span class="subject-label">Mathematics</span>
+            <span class="subject-badge" style="background:#b39ddb;color:#fff;">92 / 100</span>
+            <span class="subject-remark" style="color:#4caf50;font-weight:600;">Excellent</span>
+          </div>
+          <div class="subject-row">
+            <span class="subject-icon" style="color:#2196f3;font-size:1.3rem;margin-right:8px;">&#x269B;</span>
+            <span class="subject-label">Physics</span>
+            <span class="subject-badge" style="background:#2196f3;color:#fff;">85 / 100</span>
+            <span class="subject-remark" style="color:#ff9800;font-weight:600;">Good</span>
+          </div>
+          <div class="subject-row">
+            <span class="subject-icon" style="color:#ffb300;font-size:1.3rem;margin-right:8px;">&#x2697;</span>
+            <span class="subject-label">Chemistry</span>
+            <span class="subject-badge" style="background:#ffb300;color:#fff;">88 / 100</span>
+            <span class="subject-remark" style="color:#2196f3;font-weight:600;">Very Good</span>
+          </div>
+          <div class="subject-row">
+            <span class="subject-icon" style="color:#e040fb;font-size:1.3rem;margin-right:8px;">&#x1F4D6;</span>
+            <span class="subject-label">English</span>
+            <span class="subject-badge" style="background:#e040fb;color:#fff;">90 / 100</span>
+            <span class="subject-remark" style="color:#4caf50;font-weight:600;">Excellent</span>
+          </div>
+          <div class="subject-row">
+            <span class="subject-icon" style="color:#00bcd4;font-size:1.3rem;margin-right:8px;">&#x1F4BB;</span>
+            <span class="subject-label">Computer</span>
+            <span class="subject-badge" style="background:#00bcd4;color:#fff;">95 / 100</span>
+            <span class="subject-remark" style="color:#4caf50;font-weight:600;">Outstanding</span>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-card">
+        <div class="card-title">Performance Summary</div>
+        <div class="card-content">
+          <div style="margin-bottom: 10px; color: #7c6bb3; font-size: 1.08rem;">
+            <b>Total Marks:</b> 450 / 500<br>
+            <b>Percentage:</b> 90%<br>
+            <b>Result:</b> <span style="color:#4caf50;font-weight:600;">Passed with Distinction</span>
+          </div>
+          <div style="margin-top: 10px;">
+            <span class="subject-badge" style="background:#4caf50;color:#fff;">Excellent</span>
+            <span class="subject-badge" style="background:#2196f3;color:#fff;">Very Good</span>
+            <span class="subject-badge" style="background:#ff9800;color:#fff;">Good</span>
+            <span class="subject-badge" style="background:#b39ddb;color:#fff;">Outstanding</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<style>
+  .marks-hero {
+    background: linear-gradient(120deg, #f3eaff 60%, #ffe3f3 100%);
+    border-radius: 2rem;
+    padding: 32px 36px 24px 36px;
+    margin-bottom: 36px;
+    box-shadow: 0 6px 32px 0 rgba(120, 90, 200, 0.10);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+  }
+  .marks-title {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #6a0080;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .marks-subtitle {
+    font-size: 1.13rem;
+    color: #7c6bb3;
+    margin-bottom: 18px;
+  }
+  .subject-badge {
+    display: inline-block;
+    border-radius: 1.2rem;
+    padding: 6px 16px;
+    font-size: 0.98rem;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow: 0 2px 8px 0 rgba(180, 167, 255, 0.10);
+    vertical-align: middle;
+  }
+  .subject-icon {
+    vertical-align: middle;
+  }
+</style>
+  </div>
+</body>
+</html>
+<style>
+  .bg-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(120deg, rgba(73, 0, 112, 0.72) 60%, rgba(146, 17, 158, 0.62) 100%);
+    z-index: 0;
+    pointer-events: none;
+  }
+</style>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | Student Performance Tracker</title>
+    <link rel="stylesheet" href="../css/student-dashboard-modern.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: url('../images/Asset/dashboard.png') center center/cover no-repeat fixed;
+            min-height: 100vh;
+            position: relative;
+        }
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(120deg, rgba(146,17,158,0.13) 0%, rgba(58,62,154,0.13) 100%);
+            z-index: 0;
+            pointer-events: none;
+            mix-blend-mode: lighten;
+        }
+        .admin-dashboard-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 0 60px 0;
+        }
+        .admin-navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 22px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 2.5rem;
+            margin: 32px auto 36px auto;
+            padding: 14px 44px;
+            box-shadow: 0 4px 24px 0 rgba(120, 90, 200, 0.10);
+            width: fit-content;
+            position: relative;
+            z-index: 2;
+        }
+        .admin-navbar a {
+            text-decoration: none;
+            color: #4B3869;
+            font-weight: 600;
+            font-size: 1.08rem;
+            padding: 10px 28px;
+            border-radius: 2rem;
+            background: linear-gradient(90deg, rgba(180,167,255,0.13), rgba(255,210,245,0.13));
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px 0 rgba(180, 167, 255, 0.08);
+            letter-spacing: 0.01em;
+            margin: 0 2px;
+            position: relative;
+        }
+        .admin-navbar a:hover, .admin-navbar a.active {
+            background: linear-gradient(90deg, #b4a7ff 0%, #ffd2f5 100%);
+            color: #fff;
+            box-shadow: 0 4px 16px 0 rgba(120, 90, 200, 0.13);
+            text-shadow: 0 2px 8px rgba(180,167,255,0.10);
+            transform: translateY(-2px) scale(1.04);
+        }
+        .admin-hero {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            margin-bottom: 38px;
+            background: rgba(255,255,255,0.60);
+            border-radius: 2rem;
+            padding: 36px 40px 36px 32px;
+            box-shadow: 0 6px 32px 0 rgba(120, 90, 200, 0.10);
+            position: relative;
+        }
+        .admin-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #b4a7ff;
+            box-shadow: 0 2px 12px 0 rgba(120, 90, 200, 0.13);
+        }
+        .admin-hero-info {
+            flex: 1;
+        }
+        .admin-hero-info h1 {
+            margin: 0 0 8px 0;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #3a2e5c;
+        }
+        .admin-hero-info p {
+            margin: 0 0 12px 0;
+            font-size: 1.15rem;
+            color: #6d5c8a;
+        }
+        .admin-quick-cards {
+            display: flex;
+            gap: 18px;
+            margin-top: 10px;
+        }
+        .admin-quick-card {
+            background: linear-gradient(120deg, #e9e4ff 60%, #ffe3f3 100%);
+            border-radius: 1.2rem;
+            padding: 18px 28px;
+            box-shadow: 0 2px 12px 0 rgba(180, 167, 255, 0.10);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            min-width: 140px;
+        }
+        .admin-quick-title {
+            font-size: 0.98rem;
+            color: #7c6bb3;
+            font-weight: 500;
+        }
+        .admin-quick-value {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #4B3869;
+            margin-top: 2px;
+        }
+        .admin-dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+            margin-top: 18px;
+        }
+        .admin-dashboard-card {
+            background: rgba(255,255,255,0.82);
+            border-radius: 1.5rem;
+            box-shadow: 0 6px 32px 0 rgba(120, 90, 200, 0.10);
+            padding: 28px 26px 24px 26px;
+            position: relative;
+            transition: transform 0.18s, box-shadow 0.18s;
+            backdrop-filter: blur(2.5px);
+            border: 1.5px solid rgba(180,167,255,0.13);
+        }
+        .admin-dashboard-card:hover {
+            transform: translateY(-8px) scale(1.025);
+            box-shadow: 0 12px 36px 0 rgba(120, 90, 200, 0.16);
+        }
+        .admin-card-title {
+            font-size: 1.18rem;
+            font-weight: 700;
+            color: #3a2e5c;
+            margin-bottom: 10px;
+        }
+        .admin-card-content {
+            font-size: 1.04rem;
+            color: #5a4b7c;
+        }
+        .manage-profile-btn, .admin-action-btn {
+            background: linear-gradient(90deg, #b4a7ff 0%, #ffd2f5 100%);
+            color: #fff;
+            border: none;
+            border-radius: 1.2rem;
+            padding: 7px 18px;
+            font-size: 0.98rem;
+            font-weight: 500;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background 0.18s, box-shadow 0.18s;
+            box-shadow: 0 2px 8px 0 rgba(180, 167, 255, 0.10);
+        }
+        .manage-profile-btn:hover, .admin-action-btn:hover {
+            background: linear-gradient(90deg, #a18aff 0%, #ffb6e6 100%);
+            box-shadow: 0 4px 16px 0 rgba(180, 167, 255, 0.18);
+        }
+        .admin-alert {
+            background: linear-gradient(90deg, #fff3e0 0%, #ffe3f3 100%);
+            color: #b26a00;
+            border-radius: 1.2rem;
+            padding: 12px 18px;
+            margin-bottom: 8px;
+            font-size: 1.01rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px 0 rgba(255, 193, 7, 0.10);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .admin-progress-bar {
+            width: 100%;
+            height: 14px;
+            background: #ede7f6;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        .admin-progress-bar-inner {
+            height: 100%;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #6a0080 0%, #b39ddb 100%);
+            transition: width 0.5s;
+        }
+        .admin-insight-card {
+            background: linear-gradient(120deg, #ffe3f3 60%, #e9e4ff 100%);
+            border-radius: 1.2rem;
+            padding: 14px 22px;
+            box-shadow: 0 2px 12px 0 rgba(180, 167, 255, 0.10);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            min-width: 140px;
+            margin-bottom: 10px;
+        }
+        .admin-insight-title {
+            font-size: 0.98rem;
+            color: #7c6bb3;
+            font-weight: 500;
+        }
+        .admin-insight-value {
+            font-size: 1.18rem;
+            font-weight: 700;
+            color: #4B3869;
+            margin-top: 2px;
+        }
+        @media (max-width: 900px) {
+            .admin-dashboard-container {
+                padding: 24px 8px 40px 8px;
+            }
+            .admin-hero {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 24px 16px;
+                gap: 18px;
+            }
+            .admin-dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-overlay"></div>
+    <div class="admin-dashboard-container">
+        <!-- Navigation Bar -->
+        <nav class="admin-navbar">
+            <a href="../index.html">Home</a>
+            <a href="#" class="active">Dashboard</a>
+            <a href="admin-fees.html">Fees</a>
+            <a href="admin-news.html">News</a>
+            <a href="admin-announcements.html">Announcements</a>
+            <a href="admin-users.html">Users</a>
+            <a href="admin-reports.html">Reports</a>
+            <a href="admin-logout.html">Logout</a>
+        </nav>
+        <!-- Hero Section -->
+        <section class="admin-hero">
+            <img src="../images/Asset/avatar-default.png" alt="Admin Avatar" class="admin-avatar" />
+            <div class="admin-hero-info">
+                <h1>Welcome back, Admin</h1>
+                <p>Manage institution updates, users, and academic operations from one place</p>
+                <div class="admin-quick-cards">
+                    <div class="admin-quick-card">
+                        <span class="admin-quick-title">Total Users</span>
+                        <span class="admin-quick-value">1,234</span>
+                    </div>
+                    <div class="admin-quick-card">
+                        <span class="admin-quick-title">Active Notices</span>
+                        <span class="admin-quick-value">5</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Dashboard Grid -->
+        <div class="admin-dashboard-grid">
+            <!-- Admin Profile Summary Card -->
+            <div class="admin-dashboard-card">
+                <div class="admin-card-title">Profile Summary</div>
+                <div class="admin-card-content">
+                    <div><b>Name:</b> Priya Sharma</div>
+                    <div><b>Admin ID:</b> A-1001</div>
+                    <div><b>Role:</b> Super Admin</div>
+                    <div><b>Institution:</b> Sunrise Public School</div>
+                    <div><b>Email:</b> priya.sharma@email.com</div>
+                    <button class="manage-profile-btn">Manage Profile</button>
+                </div>
+            </div>
+            <!-- Institution Overview Cards -->
+            <div class="admin-dashboard-card">
+                <div class="admin-card-title">Institution Overview</div>
+                <div class="admin-card-content">
+                    <div><b>Total Students:</b> 900</div>
+                    <div><b>Total Teachers:</b> 60</div>
+                    <div><b>Active Classes:</b> 30</div>
+                    <div><b>Pending Fees:</b> 18</div>
+                    <div><b>Active Announcements:</b> 5</div>
+                    <div><b>News Updates:</b> 3</div>
+                </div>
+            </div>
+            <!-- Fee Management Section -->
+            <div class="admin-dashboard-card">
+                <div class="admin-card-title">Fee Management</div>
+                <div class="admin-card-content">
+                    <div style="margin-bottom:10px;"><b>Fee Status Overview</b></div>
+                    <div class="admin-progress-bar"><div class="admin-progress-bar-inner" style="width: 85%; background: linear-gradient(90deg, #b4a7ff 0%, #ffd2f5 100%);"></div></div>
+                    <div>Paid: <b>85%</b> &nbsp; | &nbsp; Unpaid: <b>15%</b></div>
+                    <div style="margin-top:10px;">18 students have pending fees</div>
+                    <button class="admin-action-btn">Update Fee Info</button>
+                </div>
+            </div>
+            <!-- College News Section -->
+            <div class="admin-dashboard-card">
+                <div class="admin-card-title">College News</div>
+                <div class="admin-card-content">
+                    <div style="margin-bottom:10px;"><b>Recent News</b></div>
+                    <div class="admin-insight-card"><span class="admin-insight-title">Annual Sports Day</span><span class="admin-insight-value">March 28</span></div>
+                    <div class="admin-insight-card"><span class="admin-insight-title">Science Fair</span><span class="admin-insight-value">April 10</span></div>
+                    <div class="admin-insight-card"><span class="admin-insight-title">New Library Opened</span><span class="admin-insight-value">March 15</span></div>
+                    <button class="admin-action-btn">Update News</button>
+                </div>
+            </div>
+            <!-- Announcement Management Section -->
+            <div class="admin-dashboard-card">
+                <div class="admin-card-title">Announcement Management</div>
+                <div class="admin-card-content">
+                    <div style="margin-bottom:10px;"><b>Recent Announcements</b></div>
+                    <div class="admin-insight-card"><span class="admin-insight-title">Exam Schedule Released</span><span class="admin-insight-value">March 20</span></div>
+                    <div class="admin-insight-card"><span class="admin-insight-title">Holiday Notice</span><span class="admin-insight-value">March 25</span></div>
+                    <button class="admin-action-btn">Post Announcement</button>
+                </div>
+            </div>
+            <!-- User Management Section -->
+            <div class="admin-dashboard-card">
+                <div class="admin-card-title">User Management</div>
+                <div class="admin-card-content">
+                    <div><b>Students:</b> 900</div>
+                    <div><b>Teachers:</b> 60</div>
+                    <div style="margin-top:10px;">
+                        <button class="admin-action-btn">Manage Students</button>
+                        <button class="admin-action-btn">Manage Teachers</button>
+                        <button class="admin-action-btn">Add User</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Institution Analytics Graph Section -->
+            <div class="admin-dashboard-card" style="grid-column: span 2;">
+                <div class="admin-card-title">Institution Analytics</div>
+                <div class="admin-card-content">
+                    <canvas id="institutionAnalyticsChart" height="120"></canvas>
+                </div>
+            </div>
+            <!-- Recent Activity Panel -->
+            <div class="admin-dashboard-card">
+                <div class="admin-card-title">Recent Activity</div>
+                <div class="admin-card-content">
+                    <div class="admin-insight-card"><span class="admin-insight-title">Fee info updated</span><span class="admin-insight-value">Today</span></div>
+                    <div class="admin-insight-card"><span class="admin-insight-title">New announcement posted</span><span class="admin-insight-value">Yesterday</span></div>
+                    <div class="admin-insight-card"><span class="admin-insight-title">News item added</span><span class="admin-insight-value">2 days ago</span></div>
+                    <div class="admin-insight-card"><span class="admin-insight-title">New teacher account created</span><span class="admin-insight-value">3 days ago</span></div>
+                </div>
+            </div>
+            <!-- Quick Actions Section -->
+            <div class="admin-dashboard-card">
+                <div class="admin-card-title">Quick Actions</div>
+                <div class="admin-card-content">
+                    <button class="admin-action-btn">Update Fee Info</button>
+                    <button class="admin-action-btn">Publish News</button>
+                    <button class="admin-action-btn">Post Announcement</button>
+                    <button class="admin-action-btn">Manage Users</button>
+                    <button class="admin-action-btn">View Reports</button>
+                </div>
+            </div>
+            <!-- Highlights / Status Cards -->
+            <div class="admin-dashboard-card">
+                <div class="admin-card-title">Highlights</div>
+                <div class="admin-card-content">
+                    <div class="admin-insight-card"><span class="admin-insight-title">Most Active Dept.</span><span class="admin-insight-value">Science</span></div>
+                    <div class="admin-insight-card"><span class="admin-insight-title">Highest Fee Completion</span><span class="admin-insight-value">Class 12A</span></div>
+                    <div class="admin-insight-card"><span class="admin-insight-title">Latest Event</span><span class="admin-insight-value">Sports Day</span></div>
+                    <div class="admin-insight-card"><span class="admin-insight-title">Urgent Notice</span><span class="admin-insight-value">Pending</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Institution Analytics Graph (Chart.js)
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('institutionAnalyticsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Student Growth', 'Attendance', 'Fee Collection', 'Performance'],
+                    datasets: [{
+                        label: 'Progress',
+                        data: [900, 87, 85, 78],
+                        backgroundColor: [
+                            'rgba(180,167,255,0.85)',
+                            'rgba(146,17,158,0.18)',
+                            'rgba(255,210,245,0.85)',
+                            'rgba(58,62,154,0.18)'
+                        ],
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 1000,
+                            ticks: { color: '#4B3869', font: { weight: 'bold' } },
+                            grid: { color: 'rgba(180,167,255,0.10)' }
+                        },
+                        x: {
+                            ticks: { color: '#4B3869', font: { weight: 'bold' } },
+                            grid: { color: 'rgba(180,167,255,0.10)' }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

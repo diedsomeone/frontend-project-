@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reports | Admin Dashboard</title>
+  <link rel="stylesheet" href="../css/student-dashboard-modern.css" />
+  <style>
+        body::before {
+          content: '';
+          position: fixed;
+          top: 0; left: 0; width: 100vw; height: 100vh;
+          background: linear-gradient(120deg, rgba(146,17,158,0.13) 0%, rgba(58,62,154,0.13) 100%);
+          z-index: 0;
+          pointer-events: none;
+          mix-blend-mode: lighten;
+        }
+    body { background: #ede6fa; }
+    .admin-navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 22px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 2.5rem;
+      margin: 32px auto 36px auto;
+      padding: 14px 44px;
+      box-shadow: 0 4px 24px 0 rgba(120, 90, 200, 0.10);
+      width: fit-content;
+      position: relative;
+      z-index: 2;
+    }
+    .admin-navbar a {
+      text-decoration: none;
+      color: #4B3869;
+      font-weight: 600;
+      font-size: 1.08rem;
+      padding: 10px 28px;
+      border-radius: 2rem;
+      background: linear-gradient(90deg, rgba(180,167,255,0.13), rgba(255,210,245,0.13));
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px 0 rgba(180, 167, 255, 0.08);
+      letter-spacing: 0.01em;
+      margin: 0 2px;
+      position: relative;
+    }
+    .admin-navbar a:hover, .admin-navbar a.active {
+      background: linear-gradient(90deg, #b4a7ff 0%, #ffd2f5 100%);
+      color: #fff;
+      box-shadow: 0 4px 16px 0 rgba(120, 90, 200, 0.13);
+      text-shadow: 0 2px 8px rgba(180,167,255,0.10);
+      transform: translateY(-2px) scale(1.04);
+    }
+    .main-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 0;
+      background: linear-gradient(120deg, #e5d1fa 0%, #d1b3ff 100%);
+      border-radius: 2rem;
+      box-shadow: 0 4px 32px 0 rgba(146,17,158,0.08);
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #4B3869;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title .fa-chart-bar {
+      color: #b4a7ff;
+      font-size: 1.5em;
+      margin-right: 6px;
+    }
+    .reports-table { width: 100%; border-radius: 1.2rem; background: rgba(255,255,255,0.85); box-shadow: 0 4px 24px 0 rgba(120, 90, 200, 0.08); overflow: hidden; }
+    .reports-table th, .reports-table td { padding: 14px 18px; text-align: left; transition: background 0.3s; }
+    .reports-table th { background: #e9e4ff; color: #6d5c8a; font-weight: 700; }
+    .reports-table tr:nth-child(even) { background: #f7f5ff; }
+    .reports-table tr {
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .reports-table tr:hover {
+      background: #f3eaff;
+      box-shadow: 0 2px 16px 0 rgba(180, 167, 255, 0.13);
+      transform: scale(1.01);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-overlay"></div>
+  <nav class="admin-navbar">
+    <a href="../index.html">Home</a>
+    <a href="admin-dashboard.html">Dashboard</a>
+    <a href="admin-fees.html">Fees</a>
+    <a href="admin-news.html">News</a>
+    <a href="admin-announcements.html">Announcements</a>
+    <a href="admin-users.html">Users</a>
+    <a href="#" class="active">Reports</a>
+    <a href="admin-logout.html">Logout</a>
+  </nav>
+  <div class="main-section">
+    <div class="section-title"><i class="fa-solid fa-chart-bar"></i>Reports</div>
+    <table class="reports-table">
+      <tr><th>Report Name</th><th>Date</th><th>Status</th></tr>
+      <tr><td>Monthly Attendance</td><td>Mar 2026</td><td>Generated</td></tr>
+      <tr><td>Fee Collection</td><td>Mar 2026</td><td>Generated</td></tr>
+      <tr><td>Performance Analysis</td><td>Feb 2026</td><td>Generated</td></tr>
+      <tr><td>New Users</td><td>Feb 2026</td><td>Pending</td></tr>
+    </table>
+  </div>
+</body>
+</html>

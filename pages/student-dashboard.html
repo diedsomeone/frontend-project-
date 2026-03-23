@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard | Student Performance Tracker</title>
+  <link rel="stylesheet" href="../css/student-dashboard-modern.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="../js/student-dashboard.js"></script>
+</head>
+<body style="background: url('../images/Asset/dashboard.png') center center/cover no-repeat fixed; position: relative; min-height: 100vh;">
+  <div class="bg-overlay"></div>
+  <div class="dashboard-container" style="position:relative;z-index:1;">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <a href="../index.html">Home</a>
+      <a href="#" class="active">Dashboard</a>
+      <a href="student-marks.html">Marks</a>
+      <a href="student-analysis.html">Analysis</a>
+      <a href="student-fees.html">Fees</a>
+      <a href="student-news.html">News</a>
+      <a href="logout.html">Logout</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <img src="../images/Asset/avatar-default.png" alt="Student Avatar" class="hero-avatar" />
+      <div class="hero-info">
+        <h1>Welcome back, Amit</h1>
+        <p>Track your academic growth and stay updated with your performance</p>
+        <div class="hero-highlights">
+          <div class="highlight-box">
+            <span class="highlight-title">Performance</span>
+            <span class="highlight-value">A</span>
+          </div>
+          <div class="highlight-box">
+            <span class="highlight-title">Attendance</span>
+            <span class="highlight-value">96%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard Grid -->
+    <div class="dashboard-grid">
+      <!-- Profile Summary Card -->
+      <div class="dashboard-card">
+        <div class="card-title">Profile Summary</div>
+        <div class="card-content">
+          <div><b>Name:</b> Amit Sharma</div>
+          <div><b>Roll No:</b> 21CS102</div>
+          <div><b>Course:</b> B.Tech Computer Science</div>
+          <div><b>Year/Sem:</b> 2nd Year / 4th Sem</div>
+          <div><b>Email:</b> amit.sharma@email.com</div>
+          <button class="edit-profile-btn">Edit Profile</button>
+        </div>
+      </div>
+
+      <!-- Attendance Card -->
+      <div class="dashboard-card">
+        <div class="card-title">Attendance</div>
+        <div class="card-content">
+          <div style="display: flex; align-items: center; gap: 18px;">
+            <div style="text-align:left;min-width:90px;">
+              <div><b>Present:</b> 72</div>
+              <div><b>Total:</b> 75</div>
+              <div><b>Percentage:</b> <span id="attendancePercent">96%</span></div>
+              <div style="color: #7c6bb3; font-size: 0.98rem; margin-top: 4px;">Excellent attendance this month</div>
+            </div>
+            <canvas id="attendanceCircle" class="progress-circle" width="90" height="90"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subject Progress Card (replaces Marks Overview) -->
+      <div class="dashboard-card">
+        <div class="card-title">Subject Progress</div>
+        <div class="card-content">
+          <div class="subject-progress">
+            <div style="display: flex; justify-content: space-between;">
+              <span>Mathematics</span><span>92%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-bar-inner" style="width: 92%; background: linear-gradient(90deg, #b4a7ff 0%, #ffd2f5 100%);"></div></div>
+          </div>
+          <div class="subject-progress">
+            <div style="display: flex; justify-content: space-between;">
+              <span>Physics</span><span>85%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-bar-inner" style="width: 85%; background: linear-gradient(90deg, #a18aff 0%, #ffb6e6 100%);"></div></div>
+          </div>
+          <div class="subject-progress">
+            <div style="display: flex; justify-content: space-between;">
+              <span>Chemistry</span><span>88%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-bar-inner" style="width: 88%; background: linear-gradient(90deg, #b4a7ff 0%, #ffd2f5 100%);"></div></div>
+          </div>
+          <div class="subject-progress">
+            <div style="display: flex; justify-content: space-between;">
+              <span>English</span><span>90%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-bar-inner" style="width: 90%; background: linear-gradient(90deg, #a18aff 0%, #ffb6e6 100%);"></div></div>
+          </div>
+          <div class="subject-progress">
+            <div style="display: flex; justify-content: space-between;">
+              <span>Computer</span><span>95%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-bar-inner" style="width: 95%; background: linear-gradient(90deg, #b4a7ff 0%, #ffd2f5 100%);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Performance Graph Section -->
+      <div class="dashboard-card" style="grid-column: span 2;">
+        <div class="card-title">Performance Graph</div>
+        <div class="card-content">
+          <canvas id="performanceChart" height="120"></canvas>
+        </div>
+      </div>
+
+
+
+      <!-- Academic Insights Card -->
+      <div class="dashboard-card">
+        <div class="card-title">Academic Insights</div>
+        <div class="card-content">
+          <ul class="insight-list">
+            <li><span class="insight-bullet"></span>Your strongest subject is <b>Mathematics</b></li>
+            <li><span class="insight-bullet"></span>Physics needs more improvement</li>
+            <li><span class="insight-bullet"></span>Attendance is stable this month</li>
+            <li><span class="insight-bullet"></span>Overall progress is improving</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Goal Tracker Card -->
+      <div class="dashboard-card">
+        <div class="card-title">Goal Tracker</div>
+        <div class="card-content">
+          <div class="goal-progress">
+            <div style="display: flex; justify-content: space-between;">
+              <span>Target</span><span>95%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-bar-inner" style="width: 92%; background: linear-gradient(90deg, #b4a7ff 0%, #ffd2f5 100%);"></div></div>
+            <div style="margin-top: 6px; color: #7c6bb3; font-size: 0.98rem;">You are getting closer to your academic goal</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upcoming Tasks / Notices Card -->
+      <div class="dashboard-card">
+        <div class="card-title">Upcoming Tasks / Notices</div>
+        <div class="card-content">
+          <div><b>Next Exam:</b> 5 April 2026</div>
+          <div><b>Assignment Due:</b> 28 March 2026</div>
+          <div><b>Reminder:</b> Submit project synopsis by 30 March</div>
+        </div>
+      </div>
+
+      <!-- Achievements / Highlights Card -->
+      <div class="dashboard-card">
+        <div class="card-title">Achievements / Highlights</div>
+        <div class="card-content">
+          <div class="badge-list">
+            <span class="badge">Attendance Star</span>
+            <span class="badge">Best Improver</span>
+            <span class="badge">Consistent Learner</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
+<style>
+  .bg-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(120deg, rgba(73, 0, 112, 0.72) 60%, rgba(146, 17, 158, 0.62) 100%);
+    z-index: 0;
+    pointer-events: none;
+  }
+</style>
+</html>
